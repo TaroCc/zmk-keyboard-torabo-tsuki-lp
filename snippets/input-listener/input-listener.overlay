@@ -1,13 +1,15 @@
 &pointing_listener {
     status = "okay";
     device = <&pointing_device>;
-    // トラックボールを動かすと layer 1 (マウスレイヤー) を自動で有効化。
-    // 動きが止まってから 500ms 後に解除する。
-    input-processors = <&zip_temp_layer 1 500>;
+    // トラックボールの上下左右を反転。その後、動かすと layer 1 (マウスレイヤー)
+    // を自動で有効化 (動きが止まって 500ms で解除)。
+    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+                        <&zip_temp_layer 1 500>;
 
-    // layer 3 (右親指ENTER長押し) を有効化中はトラックボールでスクロール。
+    // layer 3 (右親指ENTER長押し) を有効化中はトラックボールでスクロール (同じく反転)。
     scroller {
         layers = <3>;
-        input-processors = <&zip_xy_to_scroll_mapper>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+                           <&zip_xy_to_scroll_mapper>;
     };
 };
