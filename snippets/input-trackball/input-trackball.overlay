@@ -14,5 +14,8 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
         power-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | NRF_GPIO_DRIVE_H0H1)>;
+        // CPI (DPI) を明示指定して滑らかに。有効範囲 608〜4826、38刻み。
+        // 大きいほど高感度・軽い操作感。速すぎる場合は数値を下げる。
+        res-cpi = <1200>;
     };
 };
